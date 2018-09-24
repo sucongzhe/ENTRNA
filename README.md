@@ -21,9 +21,9 @@ Requirements
 Usage
 -----
 
-ENTRNA takes sequence and secondary structure as inputs. To deal with both pseudoknot-free and pseudoknotted RNAs, it uses base-pairing array to represent the RNA secondary structure. For example, a pseudoknot-free secondary structure in dot-bracket notation `.(((...))).` could be represented as `[0,10,9,8,0,0,0,3,2,1,0]`
+ENTRNA takes sequence and secondary structure as inputs. To deal with both pseudoknot-free and pseudoknotted RNAs, it uses base-pairing array to represent the RNA secondary structure. For example, a pseudoknot-free secondary structure in dot-bracket notation `.(((...))).` could be represented as `[0,10,9,8,0,0,0,3,2,1,0]`.
 
-`ENTRNA` is the main program of this package. It extracts features for the pair of RNA sequence and secondary structure, and predicts the RNA foldability after training a classification model. 
+`ENTRNA` is the main program of this package. It extracts features for the pair of RNA sequence and secondary structure, and trains a classification model, and predicts the RNA foldability after  
 
 Example:
 ```python
