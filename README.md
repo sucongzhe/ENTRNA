@@ -1,4 +1,4 @@
-ENTRNA: *A Framework to Predict RNA Foldability*
+*ENTRNA: A Framework to Predict RNA Foldability*
 =========================================================================
 
 The RNA foldability problem is defined as: 
