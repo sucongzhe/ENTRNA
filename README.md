@@ -19,35 +19,40 @@ ENTRNA is a data-driven framework for RNA foldability prediction. In addition, i
 
 ## Usage
 
-ENTRNA takes sequence and secondary structure as inputs. To deal with both pseudoknot-free and pseudoknotted RNAs, it uses base-pairing array to represent the RNA secondary structure. For example, a pseudoknot-free secondary structure in dot-bracket notation `.(((...))).` could be represented as `[0,10,9,8,0,0,0,3,2,1,0]`.
+ENTRNA takes sequence and secondary structure as inputs. 
+To deal with both pseudoknot-free and pseudoknotted RNAs, it uses base-pairing array to represent the RNA secondary structure. 
+For example, a pseudoknot-free secondary structure in dot-bracket notation `.(((...))).` could be represented as `[0,10,9,8,0,0,0,3,2,1,0]`.
 
 Two components are provided in `ENTRNA`: `ENTRNA_train` and `ENTRNA_prediction`.
 
 ### ENTRNA_train
 
-`ENTRNA_train` is fortraining ENTRNA framework. 
+`ENTRNA_train` is for training ENTRNA framework. 
 
 #### Example
-
+script:
 ```shell
 python ENTRNA_train.py --is_pseudoknot_free y --real_rna_path ./util/RNASTRAND_pseudoknot_free_feature.csv --simulation_rna_path ./util/RNASTRAND_extract_feature_pseudoknot_free/
 ```
 
+output:
 ```
-training for pseudoknot-free RNA
-training accuracy: 0.832517140059
+Training ENTRNA for pseudoknot-free RNAs
+ENTRNA training accuracy: 0.832517140059
 ```
 
 
 
 ### ENTRNA_predict
-`ENTRNA_predict` is for RNA foldability prediction. It is pretrained based on RNAs in [RNASTRAND database](http://www.rnasoft.ca/strand/)
+`ENTRNA_predict` is for RNA foldability prediction. It is pretrained based on RNAs extracted from [RNASTRAND database](http://www.rnasoft.ca/strand/)
 
 #### Example:
+script:
 ```shell
 python ENTRNA_predict.py --seq_file pseudoknotted_seq.txt --str_file pseudoknotted_str.txt 
 ```
 
+output:
 ```
 RNA sequence:
 GGCGCGGCACCGUCCGCGGAACAAACGG
