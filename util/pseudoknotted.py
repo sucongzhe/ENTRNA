@@ -70,8 +70,8 @@ def pred_foldability(df_pred,clf):
 
 
 
-def entrna_main(seq,sec_str,real_RNA_loc = "RNASTRAND_pseudoknotted_feature.csv", folder_simulation_result = "~/RNASTRAND_extract_feature/"):
-    df_pred = extract_features.extract_features(seq,sec_str)
+def entrna_main(seq,sec_str,real_RNA_loc = "RNASTRAND_pseudoknotted_feature.csv", folder_simulation_result = "RNASTRAND_extract_feature_pseudoknotted/"):
+    df_pred = extract_features.extract_features_pseudoknotted(seq,sec_str)
     clf = bulid_model(real_RNA_loc,folder_simulation_result)
     foldability = pred_foldability(df_pred,clf)
     return foldability

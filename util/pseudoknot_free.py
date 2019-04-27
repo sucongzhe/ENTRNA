@@ -24,9 +24,6 @@ def bulid_model(real_RNA_loc,folder_simulation_result):
     result_test_accuracy_list = []
     feature_set = ['ent_3', 'gc_perentage', 'ensemble_diversity', 'expected_accuracy', 'fe_per']
 
-
-
-
     mat_all = df_v1[feature_set].as_matrix()
 
     train = list(range(len(file_name_list)))
@@ -65,8 +62,8 @@ def pred_foldability(df_pred,clf):
             return clf.predict_proba([row_i,])[0][1]
 
 
-def entrna_main(seq,sec_str,real_RNA_loc = "RNASTRAND_pseudoknot_free_feature.csv", folder_simulation_result = "~/RNASTRAND_extract_feature/"):
-    df_pred = extract_features.extract_features(seq,sec_str)
+def entrna_main(seq,sec_str,real_RNA_loc = "RNASTRAND_pseudoknot_free_feature.csv", folder_simulation_result = "RNASTRAND_extract_feature_pseudoknot_free/"):
+    df_pred = extract_features.extract_features_pseudoknot_free(seq,sec_str)
     clf = bulid_model(real_RNA_loc,folder_simulation_result)
     foldability = pred_foldability(df_pred,clf)
     return foldability
