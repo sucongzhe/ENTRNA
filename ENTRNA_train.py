@@ -33,13 +33,13 @@ if __name__ == '__main__':
     pseudoknot_free_check = args.is_pseudoknot_free.lower()
 
     if pseudoknot_free_check != 'y':
-        pseudonkot_message = "training for pseudoknotted RNA"
+        pseudonkot_message = "Training ENTRNA for pseudoknotted RNA"
         accuracy = util.pseudoknotted.entrna_train(real_rna_path, simulation_rna_path)
     else:
-        pseudonkot_message = "training for pseudoknot-free RNA"
+        pseudonkot_message = "Training ENTRNA pseudoknot-free RNA"
         accuracy = util.pseudoknot_free.entrna_train(real_rna_path, simulation_rna_path)
     
     print '\n\n\n\n===============================================================\n\n'
     print pseudonkot_message
-    print 'training accuracy:',accuracy
+    print 'ENTRNA training accuracy:',accuracy
     print '\n\n===============================================================\n\n'
