@@ -27,7 +27,7 @@ Two components are provided in `ENTRNA`: `ENTRNA_train` and `ENTRNA_prediction`.
 
 ### ENTRNA_train
 
-`ENTRNA_train` is for training ENTRNA framework. 
+`ENTRNA_train` is for training ENTRNA framework. Both positive and unreliable RNA examples are required as input.
 
 #### Example
 - script:
@@ -44,7 +44,7 @@ ENTRNA training accuracy: 0.832517140059
 
 
 ### ENTRNA_predict
-`ENTRNA_predict` is for RNA foldability prediction. It is pretrained based on RNAs extracted from [RNASTRAND database](http://www.rnasoft.ca/strand/)
+`ENTRNA_predict` is for RNA foldability prediction. It is pretrained based on RNAs extracted from [RNASTRAND database](http://www.rnasoft.ca/strand/). RNA sequence and secondary structure(represented as base pair vector) are required as input. Both pseudoknot-free and pseudoknotted RNA are accepted.
 
 #### Example:
 - script:
