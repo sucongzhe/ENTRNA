@@ -30,12 +30,12 @@ Two components are provided in `ENTRNA`: `ENTRNA_train` and `ENTRNA_prediction`.
 `ENTRNA_train` is for training ENTRNA framework. 
 
 #### Example
-script:
+- script:
 ```shell
 python ENTRNA_train.py --is_pseudoknot_free y --real_rna_path ./util/RNASTRAND_pseudoknot_free_feature.csv --simulation_rna_path ./util/RNASTRAND_extract_feature_pseudoknot_free/
 ```
 
-output:
+- output:
 ```
 Training ENTRNA for pseudoknot-free RNAs
 ENTRNA training accuracy: 0.832517140059
@@ -47,12 +47,12 @@ ENTRNA training accuracy: 0.832517140059
 `ENTRNA_predict` is for RNA foldability prediction. It is pretrained based on RNAs extracted from [RNASTRAND database](http://www.rnasoft.ca/strand/)
 
 #### Example:
-script:
+- script:
 ```shell
 python ENTRNA_predict.py --seq_file pseudoknotted_seq.txt --str_file pseudoknotted_str.txt 
 ```
 
-output:
+- output:
 ```
 RNA sequence:
 GGCGCGGCACCGUCCGCGGAACAAACGG
