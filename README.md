@@ -8,8 +8,7 @@ RNA foldability prediction fundamentally differs from RNA secondary structure pr
 
 ENTRNA is a data-driven framework for RNA foldability prediction. In addition, it is able to evaluate both pseudoknot-free and pseudoknotted RNAs.
 
-Requirements
-------------
+## Requirements
 
 * Python 2.7
 * Vienna RNA python2 bindings 
@@ -18,17 +17,44 @@ Requirements
 * sklearn (== 0.19.1)
 * scipy ( == 0.19.0)
 
-Usage
------
+## Usage
 
 ENTRNA takes sequence and secondary structure as inputs. To deal with both pseudoknot-free and pseudoknotted RNAs, it uses base-pairing array to represent the RNA secondary structure. For example, a pseudoknot-free secondary structure in dot-bracket notation `.(((...))).` could be represented as `[0,10,9,8,0,0,0,3,2,1,0]`.
 
-`ENTRNA` is the main program of this package. It extracts features for the pair of RNA sequence and secondary structure, and trains a classification model, and predicts the RNA foldability. 
+Two components are provided in `ENTRNA`: `ENTRNA_train` and `ENTRNA_prediction`.
 
-Example:
-```python
-from ENTRNA import entrna_main
-seq = 'GGACUCAGUAAUAUGCUUUGGAAACGAAGCUUACAAAAUGGAGUCC'
-bp = [46, 45, 44, 43, 42, 41, 0, 0, 0, 0, 0, 0, 0, 0, 30, 29, 28, 27, 26, 25, 0, 0, 0, 0, 20, 19, 18, 17, 16, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 5, 4, 3, 2, 1]
-foldability = entrna_main(seq,bp)
+### ENTRNA_train
+
+`ENTRNA_train` is fortraining ENTRNA framework. 
+
+#### Example
+
+```shell
+python ENTRNA_train.py --is_pseudoknot_free y --real_rna_path ./util/RNASTRAND_pseudoknot_free_feature.csv --simulation_rna_path ./util/RNASTRAND_extract_feature_pseudoknot_free/
 ```
+
+```
+training for pseudoknot-free RNA
+training accuracy: 0.832517140059
+```
+
+
+
+### ENTRNA_predict
+`ENTRNA_predict` is for RNA foldability prediction. It is pretrained based on RNAs in [RNASTRAND database](http://www.rnasoft.ca/strand/)
+
+#### Example:
+```shell
+python ENTRNA_predict.py --seq_file pseudoknotted_seq.txt --str_file pseudoknotted_str.txt 
+```
+
+```
+RNA sequence:
+GGCGCGGCACCGUCCGCGGAACAAACGG
+RNA secondary structure:
+[0, 0, 18, 17, 16, 15, 14, 0, 0, 28, 27, 26, 0, 7, 6, 5, 4, 3, 0, 0, 0, 0, 0, 0, 0, 12, 11, 10]
+This is pseudoknotted RNA
+Foldability: 0.947906134401
+```
+
+

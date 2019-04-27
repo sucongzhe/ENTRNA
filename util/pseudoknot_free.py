@@ -12,7 +12,7 @@ import itertools
 from sklearn.metrics import accuracy_score
 from scipy.spatial import distance
 import extract_features
-
+from sklearn.preprocessing import Normalizer
 
 
 def bulid_model(real_RNA_loc,folder_simulation_result):
@@ -43,28 +43,34 @@ def bulid_model(real_RNA_loc,folder_simulation_result):
                 dst = distance.euclidean(row_i,x_true)
                 distance_list.append(dst)
         x_negative_list.append(mat_temp_v1[np.argmax(distance_list)])
-    x_train = np.concatenate((mat_train_real,x_negative_list), axis=0)
+    x_train_raw = np.concatenate((mat_train_real,x_negative_list), axis=0)
+    scaler = Normalizer().fit(x_train_raw)
+    x_train = scaler.transform(x_train_raw)
     y_train = np.concatenate((np.ones(len(train)),np.zeros(len(train))), axis=0)
     clf = LogisticRegression()        
     clf.fit(x_train,y_train)    
     train_acc = accuracy_score(y_train,clf.predict(x_train))
 
-    return clf
+    return scaler, clf, train_acc
 
     
-def pred_foldability(df_pred,clf):
+def pred_foldability(df_pred,clf, scaler):
     mat_x = df_pred[['ent_3', 'gc_perentage', 'ensemble_diversity', 'expected_accuracy', 'fe_per']].as_matrix()
     for row_i in mat_x:
         if np.isnan(row_i).any() == True:
             return float('nan')
             
         else:
-            return clf.predict_proba([row_i,])[0][1]
+            return clf.predict_proba(scaler.transform([row_i,]))[0][1]
 
 
-def entrna_main(seq,sec_str,real_RNA_loc = "RNASTRAND_pseudoknot_free_feature.csv", folder_simulation_result = "RNASTRAND_extract_feature_pseudoknot_free/"):
+def entrna_main(seq,sec_str,real_RNA_loc = "./util/RNASTRAND_pseudoknot_free_feature.csv", folder_simulation_result = "./util/RNASTRAND_extract_feature_pseudoknot_free/"):
     df_pred = extract_features.extract_features_pseudoknot_free(seq,sec_str)
-    clf = bulid_model(real_RNA_loc,folder_simulation_result)
-    foldability = pred_foldability(df_pred,clf)
+    scaler, clf, train_acc = bulid_model(real_RNA_loc,folder_simulation_result)
+    foldability = pred_foldability(df_pred,clf, scaler)
     return foldability
 
+
+def entrna_train(real_RNA_loc = "./util/RNASTRAND_pseudoknot_free_feature.csv", folder_simulation_result = "./util/RNASTRAND_extract_feature_pseudoknot_free/"):
+    scaler, clf, train_acc = bulid_model(real_RNA_loc,folder_simulation_result)
+    return train_acc

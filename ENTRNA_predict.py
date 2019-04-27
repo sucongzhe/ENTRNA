@@ -24,13 +24,17 @@ if __name__ == '__main__':
     rna_seq = open(args.seq_file).read()
     rna_str = open(args.str_file).read()[1:-1].split(",")
     rna_str = [int(i) for i in rna_str]
-    print 'RNA sequence:\n',rna_seq
-    print 'RNA secondary structure:\n', rna_str
+
     if util.rna_toolkit.is_pseudoknotted(rna_str) > 0:
-        print("this is pseudoknotted RNA")
+        pseudonkot_message = "This is pseudoknotted RNA"
         foldability = util.pseudoknotted.entrna_main(rna_seq, rna_str)
     else:
-        print("this is pseudoknot-free RNA")
+        pseudonkot_message = "This is pseudoknot-free RNA"
         foldability = util.pseudoknot_free.entrna_main(rna_seq, rna_str)
     
-    print 'foldability:',foldability
+    print '\n\n\n\n===============================================================\n\n'
+    print 'RNA sequence:\n',rna_seq
+    print 'RNA secondary structure:\n', rna_str
+    print pseudonkot_message
+    print 'Foldability:',foldability
+    print '\n\n===============================================================\n\n'
